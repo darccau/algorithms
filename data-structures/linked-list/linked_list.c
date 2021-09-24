@@ -35,42 +35,41 @@ struct linked_list * create_linked_list() {
 //struct node * search(struct linked_list * linked_list, int target);
 //void delete(struct linked_list * linked_list, int target);
 
-void add(struct linked_list * linked_list, struct node * node) {
-  struct node * current;
-  linked_list->size++;
-
-  if (!linked_list->list) {
-    linked_list->list = node;
-    linked_list->head->next = linked_list->list;
-    linked_list->list->next = linked_list->tail;
-    return;
-  }
-
-  current = linked_list->head->next;
-
-  while (current != linked_list->tail) {
-    current = current->next;
-  }
-
-  current->next = node;
-//  printf("current before -> %d\n", current->next->data);
-  node->next = linked_list->tail;
-}
+//void add(struct linked_list * linked_list, struct node * node) {
+//  struct node * current;
+//  linked_list->size++;
+//
+//  if (!linked_list->list) {
+//    linked_list->list = node;
+//    linked_list->head->next = linked_list->list;
+//    linked_list->list->next = linked_list->tail;
+//    return;
+//  }
+//
+//  //rent = linked_list->head->next;
+//
+//  while (linked_list->list != linked_list->tail) {
+//    linked_list->list = linked_list->list->next;
+//  }
+//
+//  printf("linked_list-list -> %d\n", linked_list->list->data);
+//  linked_list->list->next = node;
+//  printf("linked_list-list-next -> %d\n", linked_list->list->data);
+//  node->next = linked_list->tail;
+//}
 
 void display(struct linked_list * linked_list) {
-  int index = 0x0;
-  struct node * dummy;
 
+  puts("--------------[Display]----------------");
   while (linked_list->list != linked_list->tail) {
+    printf("[%d]", linked_list->list->data);
     linked_list->list = linked_list->list->next;
-    printf("{%d: %d}", index, linked_list->list->next->data);
-    ++index;
   }
+  puts("");
+  puts("---------------------------------------");
 }
 
-
 int main(void) {
-//int index;
 
 struct node * node1 = create_node(21);
 struct node * node2 = create_node(2);
@@ -78,12 +77,16 @@ struct node * node3 = create_node(3);
 struct node * node4 = create_node(4);
 struct linked_list * test_linked_list = create_linked_list();
 
-add(test_linked_list, node1);
-add(test_linked_list, node2);
-add(test_linked_list, node3);
-add(test_linked_list, node4);
+//add(test_linked_list, node1);
+//add(test_linked_list, node2);
+//add(test_linked_list, node3);
+//add(test_linked_list, node4);
 
-printf("%d\n", test_linked_list->list->next->next->data);
+test_linked_list->list = node1;
+test_linked_list->list->next = node2;
+test_linked_list->list->next->next = node3;
+test_linked_list->list->next->next->next = node4;
+node4->next = test_linked_list->tail;
 
 display(test_linked_list);
   return 0x0;
