@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 struct node {
   int data;
@@ -32,7 +33,17 @@ struct linked_list * create_linked_list() {
   return new_linked_list;
 }
 
-//struct node * search(struct linked_list * linked_list, int target);
+bool search(struct linked_list * linked_list, int target) {
+  linked_list->list = linked_list->head->next;
+
+  while (linked_list->list->next != linked_list->tail) {
+    if (linked_list->list->data == target) {
+      return true;
+    }
+    linked_list->list = linked_list->list->next;
+  }
+  return false;
+}
 //void delete(struct linked_list * linked_list, int target);
 
 void add(struct linked_list * linked_list, struct node * node) {
@@ -46,14 +57,9 @@ void add(struct linked_list * linked_list, struct node * node) {
   }
   
   while (linked_list->list->next != linked_list->tail) {
-    printf("------------------------------------\n");
-    printf("list[%p] - next[%p] - tail[%p]\n",linked_list->list, linked_list->list->next, linked_list->tail);
     linked_list->list = linked_list->list->next;
-    printf("list[%p] - next[%p] - tail[%p]\n",linked_list->list, linked_list->list->next, linked_list->tail);
-    printf("------------------------------------\n");
   }
   
-  //printf("%d\n", linked_list->list->data);
   linked_list->list->next = node;
   node->next = linked_list->tail;
   linked_list->list = linked_list->head;
@@ -61,6 +67,7 @@ void add(struct linked_list * linked_list, struct node * node) {
 
 void display(struct linked_list * linked_list) {
 
+  linked_list->list = linked_list->head->next;
   puts("--------------[Display]----------------");
   while (linked_list->list != linked_list->tail) {
     printf("[%d]", linked_list->list->data);
@@ -84,12 +91,8 @@ add(test_linked_list, node2);
 add(test_linked_list, node3);
 add(test_linked_list, node4);
 
-//test_linked_list->list = node1;
-//test_linked_list->list->next = node2;
-//test_linked_list->list->next->next = node3;
-//test_linked_list->list->next->next->next = node4;
-//node4->next = test_linked_list->tail;
 
 display(test_linked_list);
+printf("%d\n",search(test_linked_list, 0));
   return 0x0;
 }
