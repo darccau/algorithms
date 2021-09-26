@@ -44,7 +44,7 @@ bool search(struct linked_list * linked_list, int target) {
   }
   return false;
 }
-//void delete(struct linked_list * linked_list, int target);
+
 
 void add(struct linked_list * linked_list, struct node * node) {
   linked_list->size++;
@@ -63,6 +63,36 @@ void add(struct linked_list * linked_list, struct node * node) {
   linked_list->list->next = node;
   node->next = linked_list->tail;
   linked_list->list = linked_list->head;
+}
+
+void delete(struct linked_list * linked_list, int target) {
+
+  struct node * new_chain_reference;
+  linked_list->list = linked_list->head->next;
+
+  if (!linked_list->list) {
+    printf("[!] Empty linked list");
+    return;
+  }
+
+  if (linked_list->head->next->data == target) {
+    new_chain_reference = linked_list->list->next;
+    linked_list->list = new_chain_reference;
+    linked_list->head->next = linked_list->list;
+    return;
+  }
+  
+    while (linked_list->list->next != linked_list->tail) {
+
+       if (linked_list->list->next->data == target) {
+        printf("Current [%d] \n Next [%d]\n",linked_list->list->data, linked_list->list->next->data);
+        new_chain_reference = linked_list->list->next->next;
+        free(linked_list->list->next);
+        linked_list->list->next = new_chain_reference;
+        return;
+      }
+      linked_list->list = linked_list->list->next;
+    }
 }
 
 void display(struct linked_list * linked_list) {
@@ -91,8 +121,11 @@ add(test_linked_list, node2);
 add(test_linked_list, node3);
 add(test_linked_list, node4);
 
+printf("%d\n",search(test_linked_list, 0x0));
 
 display(test_linked_list);
-printf("%d\n",search(test_linked_list, 0));
+delete(test_linked_list, 21);
+delete(test_linked_list, 2);
+display(test_linked_list);
   return 0x0;
 }
