@@ -45,6 +45,9 @@ bool search(struct node * root, int target) {
 
 struct node * smallest_node(struct node * root) {
   if (root == NULL)
+    return NULL;
+
+  if (root->left == NULL)
     return root;
 
   smallest_node(root->left);
@@ -81,8 +84,7 @@ insert(root, 13);
 in_order(root);
 puts("");
 
-printf("> Search [%d]\n", search(root, 10));
-printf("> smallest [%d]\n", smallest_node(root));
+printf("> smallest [%d]\n", smallest_node(root)->data);
 
 return 0x0;
 }
