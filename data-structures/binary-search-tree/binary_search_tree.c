@@ -34,19 +34,17 @@ struct node * insert(struct node * root, int value) {
 }
 
 bool search(struct node * root, int target) {
-  if (root == NULL || root->data == target) {
-    return true;
-  }
+  if (root == NULL) 
+    return false;
 
-  else if (root->data > target) {
+  else if (root->data > target) 
     return search(root->left, target);
   }
 
-  else if (root->data < target) {
+  else if (root->data < target) 
     return search(root->rigth, target);
-  }
-  
-  return false;
+
+  return true;
 }
 
 struct node * smallest_node(struct node * root) {
