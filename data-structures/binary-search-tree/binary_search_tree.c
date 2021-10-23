@@ -18,19 +18,16 @@ struct node * create_node(int data) {
 }
 
 struct node * insert(struct node * root, int value) {
-  if (root == NULL) {
+  if (root == NULL)
     return create_node(value);
-  }
 
-  else if (root->data > value) {
+  else if (root->data > value)
     root->left = insert(root->left, value);
-  }
 
-  else {
+  else
     root->rigth = insert(root->rigth, value);
-  }
 
-  return NULL;
+  return root;
 }
 
 bool search(struct node * root, int target) {
@@ -39,7 +36,6 @@ bool search(struct node * root, int target) {
 
   else if (root->data > target) 
     return search(root->left, target);
-  }
 
   else if (root->data < target) 
     return search(root->rigth, target);
@@ -48,14 +44,8 @@ bool search(struct node * root, int target) {
 }
 
 struct node * smallest_node(struct node * root) {
-  if (!root) {
-    printf("[!] Empty tree");
+  if (root == NULL)
     return root;
-  }
-
-  if (root == NULL) {
-    return root;
-  }
 
   smallest_node(root->left);
 }
@@ -65,11 +55,9 @@ void in_order(struct node * root) {
   if (root == NULL) {
     return;
   }
-
   printf("[%d]", root->data);
   in_order(root->left);
   in_order(root->rigth);
-
 }
 
 
@@ -78,12 +66,23 @@ int main(void) {
 int index;
 struct node * root;
 
-root = create_node(5);
+root = create_node(8);
 
+insert(root, 3);
+insert(root, 1);
+insert(root, 6);
+insert(root, 4);
 insert(root, 7);
+insert(root, 10);
+insert(root, 14);
+insert(root, 13);
 
-printf("root [%d]\n", root->data);
-printf("root [%d]\n", root->rigth->data);
+
+in_order(root);
+puts("");
+
+printf("> Search [%d]\n", search(root, 10));
+printf("> smallest [%d]\n", smallest_node(root));
 
 return 0x0;
 }
