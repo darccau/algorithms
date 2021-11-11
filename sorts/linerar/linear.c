@@ -2,10 +2,10 @@
 
 
 int main(void) {
-  const int array[] = {4,2,5,3, 27, 100, 6, 35, 14};
-  const int array_length = sizeof(array)/sizeof(int);
   int i;
   int j;
+  int array[] = {4,2,5,3, 27, 100, 6, 35, 14};
+  const int array_length = sizeof(array)/sizeof(int);
   int tmp;
 
   for (i = 0x0; i < array_length; i++) {
