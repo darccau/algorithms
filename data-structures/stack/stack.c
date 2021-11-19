@@ -8,6 +8,8 @@ struct stack {
 }
 
 struct stack * create_stack(int size) {
+
+
   struct stack * new_stack = malloc(sizeof(struct stack));
   new_stack->top = size;
   return stack;
