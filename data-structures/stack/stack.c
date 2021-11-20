@@ -24,7 +24,10 @@ void add(struct stack * stack, int data) {
     printf("> Stack overflow");
     return;
   }
-  stack->elements[stack->top++] = data;
+
+  stack->size++;
+
+  stack->elements[++stack->top] = data;
 }
 
 int pop(struct stack * stack) {
@@ -33,7 +36,17 @@ int pop(struct stack * stack) {
     return -0x1;
   }
 
-  return stack->elements[--stack->top];
+  stack->size--;
+
+  return stack->elements[stack->top--];
+}
+
+void display(struct stack * stack) {
+	int element;
+	for (element = 0x0; element < stack->size; element++) {
+		printf("{%d:[%d]}\n", element, stack->elements[element]);
+	}
+	puts("");
 }
 
 
@@ -45,11 +58,8 @@ int main(void) {
   add(stack, 0x2);
   add(stack, 0x3);
   add(stack, 0x4);
-  printf("> poped element [%d]\n", pop(stack));
-  printf("> poped element [%d]\n", pop(stack));
-  printf("> poped element [%d]\n", pop(stack));
-  printf("> poped element [%d]\n", pop(stack));
-  printf("> poped element [%d]\n", pop(stack));
+
+  display(stack);
 
   return 0x0;
 }
