@@ -63,7 +63,9 @@ void in_order(struct node * root) {
   in_order(root->rigth);
 }
 
-void delete(struct node * root, int target)
+void delete(struct node * root, int target) {
+ //TODO implement all the stuff necessary 
+}
 
 int main(void) {
 
